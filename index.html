@@ -1,0 +1,260 @@
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=5; IE=8; IE=7; IE=9; IE=10; IE=11" >
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Assinatura de E-mail</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/html2canvas.min.js"></script>
+
+    <style>
+        .gridCabecalho {
+            overflow: hidden;
+            box-sizing: border-box;
+            padding: 0 30px 0 0;
+        }
+
+        h2 {
+            text-align: left;
+            font-size: 45px;
+            font-family: "system-ui";
+            margin-top: 30px;
+            color: #19382b;
+            float: right;
+        }
+
+        .formulario {
+            font-family: "verdana";
+            font-size: 18px;
+            margin-top: 60px;
+            margin-left: 10px;
+            color: #19382b;
+            width: 100%;
+            text-align: center;
+            float: left;
+        }
+        
+      
+@font-face {
+  font-family: "Degular Bold";
+  src: url('./fontes/degular-bold.woff2') format('woff2');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Degular Regular";
+  src: url('./fontes/degular-regular.woff2') format('woff2');
+  font-weight: bold;
+  font-style: normal;
+}
+       
+
+        .assinatura {
+            background-image: url('Assinatura-de-E-mail-1.png');
+            background-repeat: no-repeat;
+            background-size: 720px 223px;
+            overflow: hidden;
+            padding: 0px 20px 128px;
+            margin: 20px 0;
+            color: #19382b;
+            font-family: Verdana, sans-serif;
+        }
+
+        .nome {
+            font-size: 28px;
+            font-weight: bold;
+            margin-top: 20px;
+            display: block;
+            margin-left: 291px;
+            font-family: "Degular Bold";
+        }
+
+        .setor {
+            font-size: 22px;
+            display: block;
+            margin-top: -14px;
+            font-family: "Degular Regular";
+            margin-left: 291px;
+        }
+
+        .telefones {
+            font-size: 18px;
+            margin-top: 31px;
+            display: block;
+            font-family: "Degular Regular";
+            margin-left: 314px;
+        }
+
+        .unidades {
+            font-size: 18px;
+            margin-top: -47px;
+            display: block;
+            font-family: "Degular Regular";
+            margin-left: 314px;
+        }
+
+
+    </style>
+
+</head>
+<body>
+
+<div class="container">
+    <div class="gridCabecalho">
+        <img src="./LogoArjon1.png" /> <h2>Gerador de Assinatura</h2>
+    </div>
+
+    <div class="formulario">
+        <form class="form" id="html">
+
+            <div class="form-group" style="width: 50%; float: left">
+                <label style="margin-left: -7px;">Nome e Sobrenome</label><br>
+                <input id="nomeIn" class="form-control" placeholder="Primeira Letra Maiúscula" onkeyup="insereNome()">
+
+                <label style="margin-left: -17px;">Unidade de Atuação</label><br>
+                <input id="unidadeIn" class="form-control" onkeyup="insereUnidade()">
+            </div>
+
+            <div class="form-group" style="width: 50%; float: right; padding: 5px; margin-top: -5px">
+                <label style="margin-left: -27px;">Setor</label><br>
+                <select id="setorIn" class="form-control" onchange="javascript:insereSetor(this);" >
+                     <option value=""> </option>
+                     <option value="Administrativo">Administrativo</option>
+                     <option value="Tecnologia da Informação">Tecnologia da Informação</option>
+                </select>
+
+                <div class="form-group">
+                    <label style="margin-left: -20px;">Telefone</label><br>
+                    <input id="telefoneIn" class="form-control" value="+55 (00) 0000-0000" onkeyup="insereTelefone()">
+                </div>
+            </div>
+            <!--div class="form-group">
+                <label>Unidade:</label>
+                <input id="contratoIn" class="form-control" placeholder="Primeira Letra Maiúscula" onkeyup="insereContrato()">
+            </div-->
+        </form>
+    </div>
+</div>
+
+<div class="botao">
+    <p align="center"><button onclick="downloadimage()" class="btn btn-primary">Exporta como imagem</button></p>
+</div>
+
+<div class="container">
+    <div id="htmltoimage">
+        <style>
+        </style>
+        <div id="contIn" class="cont">
+            <div class="assinatura">
+                <span id="nomeOut" class="nome">Nome</span><span id="setorOut" class="setor">Setor</span>
+                <span class="telefones">
+                    <span id="telefoneOut" style="margin-left: -1px"> +55 (00) 0000-0000 </span>
+                </span>
+                <span class="unidades">
+                    <span id="unidadeOut" style="margin-left: -1px"> Unidade </span>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    function insereNome() {
+        var nomeOut = document.getElementById('nomeOut');
+        var nomeAss = document.getElementById('nomeIn');
+        var nomeIn = nomeAss.value;
+        if (nomeIn == '') nomeAss = 0;
+        nomeOut.innerHTML = nomeIn;
+    };
+
+    function insereSetor(){
+        var setorOut = document.getElementById('setorOut');
+        var setorAss = document.getElementById('setorIn');
+        var setorIn = setorAss.value;
+        if (setorIn == '') setorAss = 0;
+        setorOut.innerHTML = setorIn;
+    };
+
+    function insereContrato(){
+        var contratoOut = document.getElementById('contratoOut');
+        var contratoAss = document.getElementById('contratoIn');
+        var contratoIn = contratoAss.value;
+        if (contratoIn == '') contratoAss = 0;
+        contratoOut.innerHTML = contratoIn;
+    };
+
+    function insereUnidade(){
+        var unidadeOut = document.getElementById('unidadeOut');
+        var unidadeAss = document.getElementById('unidadeIn');
+        var unidadeIn = unidadeAss.value;
+        if (unidadeIn == '') unidadeAss = 0;
+        unidadeOut.innerHTML = unidadeIn;
+    };
+
+    function insereTelefone(){
+        var telefoneOut = document.getElementById('telefoneOut');
+        var telefoneAss = document.getElementById('telefoneIn');
+        var telefoneIn = telefoneAss.value;
+        if (telefoneIn == '') telefoneAss = 0;
+        telefoneOut.innerHTML = telefoneIn;
+    };
+
+    function insereHtml() {
+        var htmlIn = document.getElementById('htmlIn');
+        console.log = htmlIn;
+        var dindin = document.getElementById('contIn');
+        var contIn = dindin.value;
+        if (contIn == '') contIn = 0;
+        htmlIn.innerHTML = contIn;
+    }
+    /*(function() {
+        //$(".grid").height($(window).height());
+
+        console.log(nomeOut);
+        console.log(setorOut);
+        console.log(contratoOut);
+        console.log(unidadeOut);
+        console.log(telefoneOut);
+        var contents = $("#htmltoimage").contents();
+                //body = $(".cont")//,
+                //styleTag = $("<style></style>").appendTo(contents.find(".cont"));
+
+        $("textarea.edit").keyup(function() {
+            var $this = $(this);
+            if ($this.attr("id") === "html") {
+                body.html($this.val());
+            } else {
+                // it had to be css
+                styleTag.text($this.val());
+            }
+        });
+    });*/
+
+
+
+    function downloadimage(){
+        var container = document.getElementById("htmltoimage"); // full page
+        html2canvas(container,{
+            allowTaint : true, width : 720, height : 223
+        }).then(function(canvas) {
+            var link = document.createElement("a");
+            document.body.appendChild(link);
+            link.download = "Assinatura_Email.jpg";
+            link.href = canvas.toDataURL();
+            link.target = '_blank';
+            link.click();
+        });
+    }
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+</body>
+</html>
